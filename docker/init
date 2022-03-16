@@ -1,0 +1,29 @@
+#!/bin/sh
+
+echo "----------------------------"
+echo "Installing latest bundler..."
+echo "----------------------------"
+# bundler >= v2.3.3 cannot download git repos from GitHub, it must be locked to v2.3.2
+gem install bundler:$(cat .bundler_version)
+
+echo "------------------"
+echo "Installing gems..."
+echo "------------------"
+bundle install --jobs=4
+
+echo "--------------------------"
+echo "Installing node modules..."
+echo "--------------------------"
+npm install
+
+echo "------------------------"
+echo "Initializing database..."
+echo "------------------------"
+bundle exec rake db:reset db:migrate
+bundle exec rake db:environment:set RAILS_ENV=development
+bundle exec rake db:test:prepare
+
+echo "----------------------"
+echo "Creating admin user..."
+echo "----------------------"
+#bundle exec rake user:create_admin

@@ -1,0 +1,11 @@
+{
+  "name": "trader-app",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "vite": "^2.8.6",
+    "vite-plugin-ruby": "^3.0.8",
+    "vite-plugin-windicss": "^1.8.3",
+    "windicss": "^3.5.1"
+  }
+}

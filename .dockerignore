@@ -1,0 +1,6 @@
+.bundle/*
+Dockerfile*
+.dockerignore
+.git*
+.gem*
+docker-compose*

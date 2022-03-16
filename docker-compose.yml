@@ -1,0 +1,89 @@
+version: "3.8"
+
+x-shared-config: &shared-config
+  # Comment previous line and uncomment following lines to recompile docker image
+  build:
+    context: .
+    dockerfile: ./docker/Dockerfile
+    args:
+      BUNDLER_VERSION: "1.17.3"
+      NODE_MAJOR: "12"
+      RUBY_VERSION: "2.6.5"
+  tmpfs:
+    - /tmp
+  stdin_open: true
+  tty: true
+  volumes:
+    - .:/website:cached
+    - ./docker/.bashrc:/root/.bashrc:ro
+    - ./docker/.irbrc:/root/.irbrc:ro
+    - ./docker/.psqlrc:/root/.psqlrc:ro
+    - base_cache_rails:/app/tmp/cache
+    - base_gems:/usr/src/gems
+    - base_packs:/website/public/packs
+
+  env_file:
+    - ./docker/postgres/.env
+
+  environment:
+    - POSTGRES_HOST=postgres
+  depends_on:
+    - postgres
+    - webpacker
+services:
+  website:
+    <<: *shared-config
+    command: bash -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails s -b '0.0.0.0'"
+    ports:
+      - 3000:3000
+      - 4000:4000
+    networks:
+      - gateway
+    environment:
+      SELENIUM_REMOTE_URL: http://chrome:3333/wd/hub
+    volumes:
+      - '.:/website'
+  webpacker:
+    image: trader-app_website
+    command: bash -c "rm -rf public/packs && ./bin/webpack-dev-server"
+    volumes:
+      - '.:/website'
+    environment:
+      NODE_ENV: development
+      RAILS_ENV: development
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+    ports:
+      - '3035:3035'
+    networks:
+      - gateway
+  postgres:
+    image: postgres:13.4-alpine
+    ports:
+      - 5432:5432
+    env_file:
+      - ./docker/postgres/.env
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - gateway
+  chrome:
+    image: selenium/standalone-chrome:3.141.59
+    ports:
+      - "4444:4444"
+      - "5900:5900"
+    environment:
+      # By default, it uses 3000, which is typically used by Rails.
+      PORT: 3333
+      # Set connection timeout to avoid timeout exception during debugging
+      # https://docs.browserless.io/docs/docker.html#connection-timeout
+      CONNECTION_TIMEOUT: 600000
+    networks:
+      - gateway
+volumes:
+  base_cache_rails:
+  base_gems:
+  base_packs:
+  postgres:
+
+networks:
+  gateway: {}
