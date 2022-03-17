@@ -29,7 +29,7 @@ x-shared-config: &shared-config
     - POSTGRES_HOST=postgres
   depends_on:
     - postgres
-    - webpacker
+    - vite
 services:
   website:
     <<: *shared-config
@@ -43,9 +43,9 @@ services:
       SELENIUM_REMOTE_URL: http://chrome:3333/wd/hub
     volumes:
       - '.:/website'
-  webpacker:
+  vite:
     image: trader-app_website
-    command: bash -c "rm -rf public/packs && ./bin/webpack-dev-server"
+    command: bash -c "rm -rf public/packs && bundle exec vite dev"
     volumes:
       - '.:/website'
     environment:
