@@ -30,7 +30,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'vite_rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-gem "interactor-rails", "~> 2.0"
+gem 'interactor-rails', '~> 2.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
