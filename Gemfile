@@ -30,7 +30,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'vite_rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-gem "interactor-rails", "~> 2.0"
+gem 'interactor-rails', '~> 2.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -52,6 +52,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-performance', require: false
+  gem 'brakeman'
 end
 
 
