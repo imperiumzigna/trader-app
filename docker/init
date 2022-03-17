@@ -22,8 +22,3 @@ echo "------------------------"
 bundle exec rake db:reset db:migrate
 bundle exec rake db:environment:set RAILS_ENV=development
 bundle exec rake db:test:prepare
-
-echo "----------------------"
-echo "Creating admin user..."
-echo "----------------------"
-#bundle exec rake user:create_admin

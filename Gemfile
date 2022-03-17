@@ -42,6 +42,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.1.0'
   gem 'factory_bot_rails'
+  gem 'ffaker'
 end
 
 group :development do
@@ -54,7 +55,13 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-performance', require: false
+  gem 'rubocop-rspec', require: false
   gem 'brakeman'
+  gem 'annotate'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 
