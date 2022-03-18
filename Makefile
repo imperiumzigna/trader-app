@@ -38,7 +38,7 @@ clean:
 
 .PHONY: shell
 shell:
-	@docker-compose exec website sh
+	@docker-compose exec website bash
 
 .PHONY: status
 status:
