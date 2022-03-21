@@ -9,7 +9,7 @@ RSpec.describe 'Home', type: :request do
     end
 
     it 'returns http success' do
-      get '/home'
+      get '/'
       expect(response).to have_http_status(:success)
     end
   end
