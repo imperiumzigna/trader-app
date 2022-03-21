@@ -24,8 +24,8 @@ FactoryBot.define do
     name { FFaker::Name.name }
     surname { FFaker::Name.last_name }
     email { FFaker::Internet.email }
-    password { 'password' }
-    password_confirmation { 'password' }
+    password { 'Password1*' }
+    password_confirmation { 'Password1*' }
     active { true }
 
     after(:create) do |user|

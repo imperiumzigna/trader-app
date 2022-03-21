@@ -1,7 +1,7 @@
 
 .PHONY: start
 start:
-	@docker-compose up --build -d website postgres vite
+	@docker-compose up --build -d website postgres
 
 .PHONY: attach
 attach:
