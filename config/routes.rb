@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users, only: [:show, :update]
   get '/', to: 'home#index', as: :home
 
   devise_for :users, path: '',
