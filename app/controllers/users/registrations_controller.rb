@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     resource = UserCreator.call(user_params: sign_up_params).user
 
-    super
+    super(resource)
   end
 
   # GET /resource/edit
@@ -56,8 +56,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       home_index_path
     end
 
-  # The path used after sign up for inactive accounts.
-   def after_inactive_sign_up_path_for(resource)
-     super(resource)
-   end
+    # The path used after sign up for inactive accounts.
+    def after_inactive_sign_up_path_for(resource)
+      super(resource)
+    end
 end

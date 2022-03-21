@@ -23,7 +23,7 @@ RSpec.describe UserCreator do
 
   context 'when user params have invalid values' do
     context 'with missing name' do
-      it 'returns an error' do
+      it 'returns an user with errors' do
         user_params[:name] = nil
         service = described_class.call(user_params: user_params)
         expect(service).to be_success
@@ -41,7 +41,7 @@ RSpec.describe UserCreator do
     end
 
     context 'with invalid password' do
-      it 'returns an error' do
+      it 'returns an user with errors' do
         user_params[:password] = '123'
         service = described_class.call(user_params: user_params)
         expect(service).to be_success
@@ -50,8 +50,8 @@ RSpec.describe UserCreator do
     end
 
     context 'with already existing email' do
-      it 'returns an error' do
-        user = FactoryBot.create(:user, email: user_params[:email])
+      it 'returns an user with errors' do
+        FactoryBot.create(:user, email: user_params[:email])
         service = described_class.call(user_params: user_params)
         expect(service).to be_success
         expect(service.user.errors.full_messages).to include('Email has already been taken')
