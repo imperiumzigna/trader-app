@@ -10,10 +10,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
+  # rubocop:disable Lint/UselessAssignment
   def create
     resource = UserCreator.call(user_params: sign_up_params).user
 
-    super(resource)
+    super
   end
 
   # GET /resource/edit

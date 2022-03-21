@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Login', type: :request do
+  describe 'GET /login' do
+    it 'returns http success' do
+      get '/'
+      expect(response).to have_http_status(:redirect)
+    end
+  end
+
   describe 'POST /login' do
     let(:user) { FactoryBot.create(:user, active: false) }
 
