@@ -15,29 +15,41 @@
 
       Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
     -->
+    <style type="text/tailwindcss">
+      .pagination {
+        @apply flex justify-center;
+        @apply my-2 py-2;
+      }
+
+      .pagination * {
+        @apply px-3 py-2 mx-2;
+        @apply text-gray-700 no-underline bg-white rounded-lg;
+      }
+
+      .pagination a:hover {
+        @apply font-semibold text-gray-200 bg-gray-700;
+      }
+    </style>
   </head>
   <body>
-   <!-- component -->
+    <!-- component -->
     <div>
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-        
-        <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
-            <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
-        
-            <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
-              <%= render 'shared/side_home' %>
-            </div>
-            <div class="flex-1 flex flex-col overflow-hidden">
-                <%= render 'shared/nav_home' %>
-                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-                    <div class="container mx-auto px-6 py-8">
-                        <h3 class="text-gray-700 text-3xl font-medium"></h3>
-                        <%= yield %>
-                    </div>
-                </main>
-            </div>
+      <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+      <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
+        <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
+        <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
+          <%= render 'shared/side_home' %>
         </div>
-    </div> 
+        <div class="flex-1 flex flex-col overflow-hidden">
+          <%= render 'shared/nav_home' %>
+          <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+            <div class="container mx-auto px-6 py-8">
+              <h3 class="text-gray-700 text-3xl font-medium"></h3>
+              <%= yield %>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
-

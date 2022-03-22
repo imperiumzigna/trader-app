@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :users, only: [:update]
   get '/profile', to: 'users#show'
   get '/', to: 'home#index', as: :home
 
@@ -19,4 +18,7 @@ Rails.application.routes.draw do
       root 'users/sessions#new', as: :unauthenticated_root
     end
   end
+
+  resources :users, only: [:update]
+  resources :bank_accounts, only: [:index]
 end
