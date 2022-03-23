@@ -26,18 +26,24 @@ class Trade < ApplicationRecord
   belongs_to :bank_account, foreign_key: :account_id
 
   validates_presence_of :trade_type, :account_id, :symbol, :shares, :price
+  validates_inclusion_of :shares, in: 1..100
+  validates_numericality_of :price, greater_than: 0
 
   aasm :state do
     state :pending, initial: true
     state :done
     state :canceled
 
-    event :proccess do
+    event :process do
       transitions from: :pending, to: :done
     end
 
     event :cancel do
       transitions from: :pending, to: :canceled
     end
+  end
+
+  def total_price
+    price * shares
   end
 end
