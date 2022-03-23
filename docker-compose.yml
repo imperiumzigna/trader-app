@@ -24,11 +24,13 @@ x-shared-config: &shared-config
 
   env_file:
     - ./docker/postgres/.env
+    - ./docker/.env
 
   environment:
     - POSTGRES_HOST=postgres
   depends_on:
     - postgres
+    - redis
 
 services:
   website:
@@ -43,6 +45,10 @@ services:
       SELENIUM_REMOTE_URL: http://chrome:3333/wd/hub
     volumes:
       - '.:/website'
+  sidekiq:
+    <<: *shared-config
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    
   postgres:
     image: postgres:13.4-alpine
     ports:
@@ -53,24 +59,18 @@ services:
       - postgres:/var/lib/postgresql/data
     networks:
       - gateway
-  chrome:
-    image: selenium/standalone-chrome:3.141.59
+  redis:
+    image: redis:5.0.3-alpine
     ports:
-      - "4444:4444"
-      - "5900:5900"
-    environment:
-      # By default, it uses 3000, which is typically used by Rails.
-      PORT: 3333
-      # Set connection timeout to avoid timeout exception during debugging
-      # https://docs.browserless.io/docs/docker.html#connection-timeout
-      CONNECTION_TIMEOUT: 600000
-    networks:
-      - gateway
+      - "6379:6379"
+    volumes:
+      - redis:/data
 volumes:
   base_cache_rails:
   base_gems:
   base_packs:
   postgres:
+  redis:
 
 networks:
   gateway: {}
