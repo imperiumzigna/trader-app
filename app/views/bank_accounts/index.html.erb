@@ -1,3 +1,4 @@
+<h2>Bank Accounts</h2>
 <div class="flex flex-col mt-8">
   <div class='flex justify-center mb-4'>
     <div class="mx-4 lg:mx-0">
@@ -40,7 +41,7 @@
                 <%= bank_account.trades.done.count %>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900">Show More</a>
+                <a href="<%= bank_account_path(bank_account) %>" class="text-indigo-600 hover:text-indigo-900">Show More</a>
               </td>
             </tr>
           <% end %>
