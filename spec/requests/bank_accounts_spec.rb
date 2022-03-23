@@ -34,4 +34,31 @@ RSpec.describe 'BankAccounts', type: :request do
       end
     end
   end
+
+  describe 'GET /bank_accounts/:id' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:bank_account) { FactoryBot.create(:bank_account, user: user) }
+    let(:uri) { "/bank_accounts/#{bank_account.id}" }
+
+    before(:each) do
+      sign_in user
+    end
+
+    it 'returns http success' do
+      get uri
+      expect(response).to have_http_status(:success)
+    end
+
+    context 'when bank_account was not found' do
+      let(:uri) { '/bank_accounts/not_found' }
+
+      it 'redirects to index with error' do
+        get uri
+        expect(response).to have_http_status(:redirect)
+        follow_redirect!
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include('Bank account not found')
+      end
+    end
+  end
 end

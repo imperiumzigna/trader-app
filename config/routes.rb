@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:update]
-  resources :bank_accounts, only: [:index]
+  resources :bank_accounts, only: [:index, :show]
 end

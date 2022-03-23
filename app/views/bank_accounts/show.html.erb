@@ -1,0 +1,29 @@
+<section class="text-gray-600 body-font relative">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-col text-center w-full mb-12">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Bank Account <%= @bank_account.id %></h1>
+      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Bank Account information!</p>
+    </div>
+    <div class="lg:w-1/2 md:w-2/3 mx-auto">
+      <div class="flex flex-wrap -m-2">
+        <div class="p-2 w-full">
+          <div class="relative">
+            <label for="amount" class="leading-7 text-sm text-gray-600">Amount</label>
+            <input type="text" disabled value='<%= @bank_account.amount %>' id="amount" name="amount" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          </div>
+        </div>
+        <div class="p-2 w-full">
+          <div class="relative">
+            <label for="message" class="leading-7 text-sm text-gray-600">Number of trades done</label>
+            <input type="text" disabled value='<%= @bank_account.trades.done.count %>' id="number-of-trades" name="number-of-trades" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          </div>
+        </div>
+        <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
+          <a href="<%= bank_accounts_path %>" class="text-indigo-500 inline-flex items-center leading-none px-4 py-2 border border-indigo-500 text-base font-medium rounded-md bg-white hover:bg-indigo-500 hover:text-white focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+            Back
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
