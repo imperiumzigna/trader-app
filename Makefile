@@ -1,7 +1,7 @@
 
 .PHONY: start
 start:
-	@docker-compose up --build -d website postgres
+	@docker-compose up --build -d website postgres sidekiq
 
 .PHONY: attach
 attach:

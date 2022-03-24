@@ -21,4 +21,5 @@ class BankAccount < ApplicationRecord
   has_many :trades, dependent: :destroy, foreign_key: :account_id
 
   validates_presence_of :amount, :user_id
+  validates_numericality_of :amount, greater_than_or_equal_to: 0.0
 end

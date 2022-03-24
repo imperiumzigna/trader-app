@@ -22,9 +22,9 @@ FactoryBot.define do
   factory :trade do
     trade_type { 'buy' }
     account_id { FactoryBot.create(:bank_account).id }
-    symbol { FFaker::Company.symbol }
+    symbol { FFaker::Company.name }
     shares { 1 }
     price { 1.5 }
-    timestamp { Time.now.to_i }
+    timestamp { 10.minutes.ago.to_s(:db) }
   end
 end
