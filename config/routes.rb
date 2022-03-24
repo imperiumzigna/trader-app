@@ -21,5 +21,5 @@ Rails.application.routes.draw do
 
   resources :users, only: [:update]
   resources :bank_accounts, only: [:index, :show]
-  resources :trades, only: [:index, :new, :create]
+  resources :trades, only: [:index, :new, :show, :create]
 end
