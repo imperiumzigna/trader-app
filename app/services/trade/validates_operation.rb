@@ -13,6 +13,7 @@
     private
       def validate_buy
         if trade.trade_type == 'buy' && trade.total_price > bank_account.amount
+          trade.cancel!
           context.fail!(message: 'Not enough balance!')
         end
       end

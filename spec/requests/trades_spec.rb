@@ -74,10 +74,9 @@ RSpec.describe 'Trades', type: :request do
         end.not_to change(Trade, :count)
       end
 
-      it 'returns new_trade_path with errors' do
+      it 'redirects to trades' do
         post uri, params: params
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include('Trade attributes cannot be blank')
+        expect(response).to redirect_to(trades_path)
       end
     end
   end

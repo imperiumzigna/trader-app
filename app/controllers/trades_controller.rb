@@ -10,14 +10,11 @@ class TradesController < ApplicationController
   end
 
   def create
-    service = TradeCreator.call(trade_params: trade_params)
+    TradeCreator.call(trade_params: trade_params)
 
-    if service.success?
-      redirect_to trades_path, notice: 'Trade was successfully created.'
-    else
-      @trade = service.trade
-      render :new
-    end
+    flash[:alert] = 'Trade was successfully created.'
+
+    redirect_to trades_path
   end
 
   private

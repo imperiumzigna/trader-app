@@ -9,7 +9,7 @@
         </svg>
       </span>
       <%= form_with url: trades_path, method: :get do |form| %>
-        <input name='search' class="form-input w-32 sm:w-64 rounded-md pl-10 pr-4 focus:border-indigo-600" type="text" placeholder="Search by bank account or state">
+        <input name='search' class="form-input w-32 sm:w-64 rounded-md pl-10 pr-4 focus:border-indigo-600" type="text" placeholder="Search by bank account">
         <button type='submit' class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Submit</button>
       <% end %>
     </div>

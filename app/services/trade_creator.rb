@@ -32,15 +32,7 @@ class TradeCreator
       if trade.timestamp >= Time.now.to_i
         ScheduleTradeJob.perform_at(trade.timestamp, trade.id)
       else
-        run_trade
-      end
-    end
-
-    def run_trade
-      service = Trade::Run.call(trade_id: trade.id)
-
-      if service.failure? && service.trade.may_cancel?
-        service.trade.cancel!
+        Trade::Run.call(trade_id: trade.id)
       end
     end
 
