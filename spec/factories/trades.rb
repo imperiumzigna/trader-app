@@ -25,6 +25,6 @@ FactoryBot.define do
     symbol { FFaker::Company.name }
     shares { 1 }
     price { 1.5 }
-    timestamp { Time.now.to_i }
+    timestamp { 10.minutes.ago.to_s(:db) }
   end
 end

@@ -1,0 +1,49 @@
+<div class="my-auto mx-auto min-h-screen">
+  <div class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+      <div class="lg:w-full md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+        <%= form_for(@trade, url: trades_path, method: :post) do |f| %>
+          <%= render "users/shared/error_messages", resource: @trade %>
+          <h2 class="text-gray-900 text-lg font-medium title-font mb-5">New Trade</h2>
+          <div class="relative mb-4">
+            <label for="trade[symbol]" class="leading-7 text-sm text-gray-600">Symbol</label>
+            <input type="text" required id="symbol" name="trade[symbol]" class="uppercase w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          </div>
+          <div class="relative mb-4">
+            <label for="trade[account_id]" class="leading-7 text-sm text-gray-600">Bank Account</label>
+            <select required name='trade[account_id]' class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0
+                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Select you Bank Account">
+              <% current_user.bank_accounts.each do |bank_account| %>
+                <option value="<%= bank_account.id %>"><%= bank_account.id %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="relative mb-4">
+            <label for="trade[shares]" class="leading-7 text-sm text-gray-600">Shares</label>
+            <input type="number" min='1' max='100' required id="shares" name="trade[shares]" class="uppercase w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          </div>
+          <div class="relative mb-4">
+            <label for="trade[trade_type]" class="leading-7 text-sm text-gray-600">Trade Type</label>
+            <select required name='trade[trade_type]' class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0
+                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Select you Bank Account">
+              <%= TradeType.all.each do |trade_type| %>
+                <option value="<%= trade_type.name %>"><%= trade_type.name %></option>
+              <% end %>
+              </select>
+            </div>
+            <div class="relative mb-4">
+              <label for="trade[price]" class="leading-7 text-sm text-gray-600">Price</label>
+              <input type="number" min='1' required id="price" name="trade[price]" class="uppercase w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            </div>
+            <div class="relative mb-4">
+              <label for="trade[timestamp]" class="leading-7 text-sm text-gray-600">Process at</label>
+              <%= f.datetime_field :timestamp, class: 'uppercase w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out' %>
+            </div>
+            <div class="relative mb-4">
+            <button type="submit" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Submit</button>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>

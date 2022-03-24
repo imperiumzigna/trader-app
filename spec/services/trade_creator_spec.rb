@@ -16,7 +16,7 @@ RSpec.describe TradeCreator, type: :service do
                          shares: 10, price: 1,
                          symbol: 'AAPL',
                          account_id: bank_account_id,
-                         timestamp: 2.days.ago.to_i } }
+                         timestamp: 2.days.ago.to_s } }
 
         it 'creates trade' do
           expect { described_class.call(trade_params: params) }.to change(Trade, :count).by(1)
@@ -38,7 +38,7 @@ RSpec.describe TradeCreator, type: :service do
                          shares: 10, price: 1,
                          symbol: 'AAPL',
                          account_id: bank_account_id,
-                         timestamp: 5.days.from_now.to_i } }
+                         timestamp: 5.days.from_now.to_s } }
 
         it 'creates trade' do
           expect { described_class.call(trade_params: params) }.to change(Trade, :count).by(1)
@@ -56,7 +56,7 @@ RSpec.describe TradeCreator, type: :service do
                        shares: 100, price: 0,
                        symbol: 'AAPL',
                        account_id: bank_account_id,
-                       timestamp: Time.now.to_i } }
+                       timestamp: Time.now.to_s } }
 
       it 'does not create trade' do
         expect { described_class.call(trade_params: params) }.to change(Trade, :count).by(0)

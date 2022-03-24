@@ -4,6 +4,7 @@ class TradeCreator
   include Interactor
 
   delegate :trade, to: :context
+  delegate :trade_params, to: :context
 
   def self.call(trade_params:)
     super
@@ -16,11 +17,15 @@ class TradeCreator
 
   private
     def create_trade
-      trade = Trade.new(context.trade_params)
+      trade = Trade.new(formated_trade_params)
 
       trade.save
 
       context.trade = trade
+    rescue ActiveRecord::NotNullViolation
+      trade.errors.add(:base, 'Trade attributes cannot be blank')
+      context.trade = trade
+      context.fail!
     end
 
     def schedule_trade
@@ -37,5 +42,12 @@ class TradeCreator
       if service.failure? && service.trade.may_cancel?
         service.trade.cancel!
       end
+    end
+
+    def formated_trade_params
+      trade_params[:timestamp] = trade_params[:timestamp]&.to_datetime&.to_i
+      trade_params[:symbol] = trade_params[:symbol].upcase
+
+      trade_params
     end
 end
