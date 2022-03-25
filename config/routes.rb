@@ -1,4 +1,8 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
+
   get '/profile', to: 'users#show'
   get '/', to: 'home#index', as: :home
 
@@ -21,5 +25,5 @@ Rails.application.routes.draw do
 
   resources :users, only: [:update]
   resources :bank_accounts, only: [:index, :show]
-  resources :trades, only: [:index, :new, :show, :create]
+  resources :trades, except: [:destroy]
 end

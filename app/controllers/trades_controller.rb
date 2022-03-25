@@ -1,4 +1,5 @@
 class TradesController < ApplicationController
+  before_action :set_trade, only: [:show, :edit, :update]
   layout 'base'
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
@@ -12,7 +13,17 @@ class TradesController < ApplicationController
   end
 
   def show
-    @trade = Trade.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    TradeUpdater.call(trade_id: @trade.id, trade_params: trade_params)
+
+    flash[:alert] = 'Trade was successfully updated.'
+
+    redirect_to trades_path
   end
 
   def create
@@ -32,5 +43,9 @@ class TradesController < ApplicationController
       flash[:alert] = 'Trade not found'
 
       redirect_to trades_path
+    end
+
+    def set_trade
+      @trade = Trade.find(params[:id])
     end
 end
