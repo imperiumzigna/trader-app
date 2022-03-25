@@ -1,3 +1,5 @@
+require 'sidekiq'
+
 sidekiq_config = { url: ENV['REDIS_URL'] }
 
 Sidekiq.configure_server do |config|

@@ -12,34 +12,33 @@ class TradeCreator
 
   def call
     create_trade
-    schedule_trade if trade.persisted?
+    process_trade if trade.persisted?
   end
 
   private
     def create_trade
-      trade = Trade.new(formated_trade_params)
+      params = TradeSanitizer.call(trade_params: trade_params).trade_params
+      trade = Trade.new(params)
 
-      trade.save
+      trade.save!
 
       context.trade = trade
-    rescue ActiveRecord::NotNullViolation
+    rescue ActiveRecord::NotNullViolation, ActiveRecord::RecordInvalid
       trade.errors.add(:base, 'Trade attributes cannot be blank')
       context.trade = trade
       context.fail!
     end
 
     def schedule_trade
+      job_id = ScheduleTradeJob.perform_at(trade.timestamp, trade.id)
+      trade.update(job_id: job_id)
+    end
+
+    def process_trade
       if trade.timestamp >= Time.now.to_i
-        ScheduleTradeJob.perform_at(trade.timestamp, trade.id)
+        schedule_trade
       else
         Trade::Run.call(trade_id: trade.id)
       end
-    end
-
-    def formated_trade_params
-      trade_params[:timestamp] = trade_params[:timestamp]&.to_datetime&.to_i
-      trade_params[:symbol] = trade_params[:symbol].upcase
-
-      trade_params
     end
 end

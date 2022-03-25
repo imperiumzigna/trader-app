@@ -12,6 +12,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  account_id :integer          not null
+#  job_id     :string
 #
 # Foreign Keys
 #
@@ -26,5 +27,6 @@ FactoryBot.define do
     shares { 1 }
     price { 1.5 }
     timestamp { 10.minutes.ago.to_s(:db) }
+    job_id { nil }
   end
 end

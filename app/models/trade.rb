@@ -12,6 +12,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  account_id :integer          not null
+#  job_id     :string
 #
 # Foreign Keys
 #

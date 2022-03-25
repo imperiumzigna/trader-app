@@ -15,6 +15,18 @@ class TradesController < ApplicationController
     @trade = Trade.find(params[:id])
   end
 
+  def edit
+    @trade = Trade.find(params[:id])
+  end
+
+  def update
+    TradeUpdater.call(trade_id: params[:id], trade_params: trade_params)
+
+    flash[:alert] = 'Trade was successfully updated.'
+
+    redirect_to trades_path
+  end
+
   def create
     TradeCreator.call(trade_params: trade_params)
 
