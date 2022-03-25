@@ -64,7 +64,7 @@ RSpec.describe TradeCreator, type: :service do
 
       it 'returns trade with errors' do
         trade = described_class.call(trade_params: params).trade
-        expect(trade.errors.full_messages).to eq(['Price must be greater than 0'])
+        expect(trade.errors.full_messages).to eq(['Price must be greater than 0', 'Trade attributes cannot be blank'])
       end
     end
   end

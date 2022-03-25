@@ -132,7 +132,7 @@ RSpec.describe 'Trades', type: :request do
                      shares: 1,
                      price: 1.5,
                      symbol: 'AAPL',
-                     timestamp: 10.minutes.ago.to_i } } }
+                     timestamp: 10.minutes.ago } } }
 
     before(:each) do
       sign_in user
