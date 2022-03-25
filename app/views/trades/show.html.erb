@@ -1,0 +1,42 @@
+<div class="my-auto mx-auto min-h-screen">
+  <div class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+      <div class="lg:w-full md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+          <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Trade <%= @trade.id %></h2>
+          <div class="relative mb-4">
+            <label for="trade[symbol]" class="leading-7 text-sm text-gray-600">Symbol</label>
+            <input type="text" disabled value="<%= @trade.symbol %>" id="symbol" name="trade[symbol]" class="uppercase w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          </div>
+          <div class="relative mb-4">
+            <label for="trade[account_id]" class="leading-7 text-sm text-gray-600">Bank Account</label>
+               <input type="number" disabled value="<%= @trade.account_id %>" id="shares" name="trade[account_id]" class="uppercase w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"> 
+          </div>
+          <div class="relative mb-4">
+            <label for="trade[shares]" class="leading-7 text-sm text-gray-600">Shares</label>
+            <input type="number" min='1' disabled value="<%= @trade.shares %>"  max='100' id="shares" name="trade[shares]" class="uppercase w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          </div>
+          <div class="relative mb-4">
+            <label for="trade[trade_type]" class="leading-7 text-sm text-gray-600">Trade Type</label>
+            <input type="text" min='1' disabled value="<%= @trade.trade_type %>" id="price" name="trade[trade_type]" class="uppercase w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            </div>
+            <div class="relative mb-4">
+              <label for="trade[price]" class="leading-7 text-sm text-gray-600">Price</label>
+              <input type="number" min='1' disabled value="<%= @trade.price %>" id="price" name="trade[price]" class="uppercase w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            </div>
+            <div class="relative mb-4">
+              <label for="trade[timestamp]" class="leading-7 text-sm text-gray-600">Process at</label>
+              <input disabled value='<%= l Time.at(@trade.timestamp).to_datetime %>' id="timestamp" name="trade[timestamp]" class="uppercase w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            </div>
+            <div class="relative mb-4">
+              <label for="trade[state]" class="leading-7 text-sm text-gray-600">State</label>
+              <input disabled value='<%= @trade.state %>' id="timestamp" name="trade[state]" class="uppercase w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            </div>
+            <div class="relative mb-4">
+            <a href="<%= trades_path %>" class="text-indigo-500 inline-flex items-center leading-none px-4 py-2 border border-indigo-500 text-base font-medium rounded-md bg-white hover:bg-indigo-500 hover:text-white focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+            Back
+            </a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

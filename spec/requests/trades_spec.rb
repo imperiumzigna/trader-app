@@ -80,4 +80,31 @@ RSpec.describe 'Trades', type: :request do
       end
     end
   end
+
+  describe 'GET /trades/:id' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:trade) { FactoryBot.create(:trade, account_id: user.bank_account_ids.first) }
+    let(:uri) { "/trades/#{trade.id}" }
+
+    before(:each) do
+      sign_in user
+    end
+
+    it 'returns http success' do
+      get uri
+      expect(response).to have_http_status(:success)
+    end
+
+    context 'when trade was not found' do
+      let(:uri) { '/trades/not_found' }
+
+      it 'redirects to index with error' do
+        get uri
+        expect(response).to have_http_status(:redirect)
+        follow_redirect!
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include('Trade not found')
+      end
+    end
+  end
 end
