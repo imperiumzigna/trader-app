@@ -2,11 +2,12 @@
 #
 # Table name: bank_accounts
 #
-#  id         :bigint           not null, primary key
-#  amount     :float
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint
+#  id                :bigint           not null, primary key
+#  amount            :float
+#  trades_done_count :integer          default(0), not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  user_id           :bigint
 #
 # Indexes
 #
