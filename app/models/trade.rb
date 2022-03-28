@@ -26,7 +26,7 @@ class Trade < ApplicationRecord
 
   belongs_to :bank_account, foreign_key: :account_id
 
-  counter_culture :bank_account, column_name: proc {|trade| trade.done? ? 'trades_done_count' : nil },
+  counter_culture :bank_account, column_name: proc { |trade| trade.done? ? 'trades_done_count' : nil },
   column_names: {
     ['trades.state = ?', 'done'] => 'trades_done_count'
   }
