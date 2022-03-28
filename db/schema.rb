@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_181340) do
+ActiveRecord::Schema.define(version: 2022_03_28_115139) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2022_03_24_181340) do
     t.float 'amount'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.integer 'trades_done_count', default: 0, null: false
     t.index ['user_id'], name: 'index_bank_accounts_on_user_id'
   end
 

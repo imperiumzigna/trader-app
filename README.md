@@ -1,24 +1,46 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Trader APP
 
-Things you may want to cover:
+Description: Trader APP is a toy for trading stocks. Where the user can buy or sell stocks
 
-* Ruby version
+![login](/docs/login.png)
 
-* System dependencies
+![banks](/docs/banks.png)
 
-* Configuration
+![trades](/docs/trades.png)
 
-* Database creation
+### Setup
 
-* Database initialization
+The app uses a Makefile to setup the project.
 
-* How to run the test suite
+#### Install dependencies
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+$ make init
+```
 
-* Deployment instructions
+#### Start dev environment
 
-* ...
+```
+$ make start
+```
+
+#### Run container console
+
+```
+$ make shell
+```
+
+#### Linting
+
+```
+$ make lint <file or folder> -- -a
+```
+
+#### Testing
+
+```
+$ make shell
+$ bundle exec rspec ...
+```
